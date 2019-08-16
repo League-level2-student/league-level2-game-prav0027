@@ -12,12 +12,12 @@ public class ImageChoosing implements ActionListener{
 	
 	public static void main(String[] args) {
 		ImageChoosing imagechoosing = new ImageChoosing();
-		String player1 = JOptionPane.showInputDialog("What is the first player's name?");
-		String player2 = JOptionPane.showInputDialog("What is the second player's name?");	
+		String player1 = JOptionPane.showInputDialog("What is the first player's name? This player's color will be red.");
+		String player2 = JOptionPane.showInputDialog("What is the second player's name? This player's color will be green.");	
 		imagechoosing.setup();
 	}
 	
-	int gamePanel;
+	int image;
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
 	GridLayout layout = new GridLayout(2,2);
@@ -48,27 +48,31 @@ public class ImageChoosing implements ActionListener{
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+	
+	void getxoimages() {
+		
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(xo)) {
 			System.out.println("xo");
-			gamePanel = 0;
+			image = TicTacToe.XO;
 		}
 		if(e.getSource().equals(catdog)) {
 			System.out.println("catDog");
-			gamePanel = 1;
+			image = TicTacToe.CATDOG;
 		}
 		if(e.getSource().equals(sports)) {
 			System.out.println("sports");
-			gamePanel = 2;
+			image = TicTacToe.SPORTS;
 		}
 		if(e.getSource().equals(music)) {
 			System.out.println("music");
-			gamePanel = 3;
+			image = TicTacToe.MUSIC;
 		}
-		
+		new TicTacToe(image).setup();
 	}
 	
 

@@ -2,11 +2,15 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class ImageChoosing implements ActionListener{
 	
@@ -14,6 +18,7 @@ public class ImageChoosing implements ActionListener{
 		ImageChoosing imagechoosing = new ImageChoosing();
 		String player1 = JOptionPane.showInputDialog("What is the first player's name? This player's color will be red.");
 		String player2 = JOptionPane.showInputDialog("What is the second player's name? This player's color will be green.");	
+		JOptionPane.showMessageDialog(null, "The aim of the game is to get 3 in a row. When it is your turn, click on a button to put your marker there. When the background is red, it is "+player1+"'s turn. When the background is green, it is "+player2+"'s turn.");
 		imagechoosing.setup();
 	}
 	
@@ -25,6 +30,9 @@ public class ImageChoosing implements ActionListener{
 	JButton catdog = new JButton();
 	JButton sports = new JButton();
 	JButton music = new JButton();
+	
+	BufferedImage player1image;
+	BufferedImage player2image;
 	
 	void setup() {
 		frame.setSize(500, 500);
@@ -52,28 +60,79 @@ public class ImageChoosing implements ActionListener{
 	void getxoimages() {
 		
 	}
-
+	void loadXOImages() {
+		try {
+	        player1Image("x.png");
+	        player2Image("o.png");
+		} catch (Exception e) {
+	        
+	    }
+	}
+	
+	void loadCatDogImages() {
+		try {
+	        player1Image("cat.jpeg");
+	        player2Image("dog.jpg");
+		} catch (Exception e) {
+	        
+	    }
+	}
+	
+	void loadSportsImages() {
+		try {
+	        player1Image("football.png");
+	        player2Image("basketball.jpeg");
+		} catch (Exception e) {
+	        
+	    }
+	}
+	
+	void loadMusicImages() {
+		try {
+	        player1Image("trumpet.jpg");
+	        player2Image("violin.png");
+		} catch (Exception e) {
+	        
+	    }
+	}
+	
+	void player1Image(String fileName) {
+		try {
+			player1image = ImageIO.read(this.getClass().getResourceAsStream(fileName));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	void player2Image(String fileName) {
+		try {
+			player2image = ImageIO.read(this.getClass().getResourceAsStream(fileName));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(xo)) {
 			System.out.println("xo");
-			image = TicTacToe.XO;
+			loadXOImages();
 		}
 		if(e.getSource().equals(catdog)) {
 			System.out.println("catDog");
-			image = TicTacToe.CATDOG;
+			loadCatDogImages();
 		}
 		if(e.getSource().equals(sports)) {
 			System.out.println("sports");
-			image = TicTacToe.SPORTS;
+			loadSportsImages();
 		}
 		if(e.getSource().equals(music)) {
 			System.out.println("music");
-			image = TicTacToe.MUSIC;
+			loadMusicImages();
 		}
-		new TicTacToe(image).setup();
+		SwingUtilities.invokeLater(new TicTacToe(player1image, player2image));
 	}
-	
 
 }

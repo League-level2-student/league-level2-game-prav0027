@@ -16,10 +16,11 @@ public class ImageChoosing implements ActionListener{
 	
 	public static void main(String[] args) {
 		ImageChoosing imagechoosing = new ImageChoosing();
-		String player1 = JOptionPane.showInputDialog("What is the first player's name? This player's color will be red.");
-		String player2 = JOptionPane.showInputDialog("What is the second player's name? This player's color will be green.");	
-		JOptionPane.showMessageDialog(null, "The aim of the game is to get 3 in a row. When it is your turn, click on a button to put your marker there. When the background is red, it is "+player1+"'s turn. When the background is green, it is "+player2+"'s turn.");
+		String player1name = JOptionPane.showInputDialog("What is the first player's name? This player's color will be red.");
+		String player2name = JOptionPane.showInputDialog("What is the second player's name? This player's color will be green.");	
+		JOptionPane.showMessageDialog(null, "The aim of the game is to get 3 in a row. When it is your turn, click on a button to put your marker there. \n When the background is red, it is "+player1name+"'s turn. When the background is green, it is "+player2name+"'s turn.");
 		imagechoosing.setup();
+		Player player1 = new Player(player1name, player1image, );
 	}
 	
 	int image;

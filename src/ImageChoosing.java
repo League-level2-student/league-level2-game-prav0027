@@ -16,11 +16,8 @@ public class ImageChoosing implements ActionListener{
 	
 	public static void main(String[] args) {
 		ImageChoosing imagechoosing = new ImageChoosing();
-		String player1name = JOptionPane.showInputDialog("What is the first player's name? This player's color will be red.");
-		String player2name = JOptionPane.showInputDialog("What is the second player's name? This player's color will be green.");	
-		JOptionPane.showMessageDialog(null, "The aim of the game is to get 3 in a row. When it is your turn, click on a button to put your marker there. \n When the background is red, it is "+player1name+"'s turn. When the background is green, it is "+player2name+"'s turn.");
 		imagechoosing.setup();
-		Player player1 = new Player(player1name, player1image, );
+		
 	}
 	
 	int image;
@@ -35,7 +32,13 @@ public class ImageChoosing implements ActionListener{
 	BufferedImage player1image;
 	BufferedImage player2image;
 	
+	String player1name;
+	String player2name;
+	
 	void setup() {
+		player1name = JOptionPane.showInputDialog("What is the first player's name? This player's color will be red.");
+		player2name = JOptionPane.showInputDialog("What is the second player's name? This player's color will be green.");
+		JOptionPane.showMessageDialog(null, "The aim of the game is to get 3 in a row. When it is your turn, click on a button to put your marker there. \n When the background is red, it is "+player1name+"'s turn. When the background is green, it is "+player2name+"'s turn.");
 		frame.setSize(500, 500);
 		panel.setBackground(Color.gray);
 		frame.add(panel);
@@ -118,22 +121,18 @@ public class ImageChoosing implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource().equals(xo)) {
-			System.out.println("xo");
 			loadXOImages();
 		}
 		if(e.getSource().equals(catdog)) {
-			System.out.println("catDog");
 			loadCatDogImages();
 		}
 		if(e.getSource().equals(sports)) {
-			System.out.println("sports");
 			loadSportsImages();
 		}
 		if(e.getSource().equals(music)) {
-			System.out.println("music");
 			loadMusicImages();
 		}
-		SwingUtilities.invokeLater(new TicTacToe(player1image, player2image));
+		SwingUtilities.invokeLater(new TicTacToe(player1image, player2image, player1name, player2name));
 	}
 
 }

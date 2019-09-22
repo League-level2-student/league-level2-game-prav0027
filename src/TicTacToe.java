@@ -66,18 +66,26 @@ public class TicTacToe implements MouseListener, Runnable {
 		int index = getButtonIndex(button);
 
 		if (turn % 2 == 0) {
-			panel.setBackground(Color.green);
-			icon = new ImageIcon(player1image);
-			turns[index] = 1;
+			if (button.getText() == " ") {
+				panel.setBackground(Color.green);
+				icon = new ImageIcon(player1image);
+				turns[index] = 1;
+				button.setIcon(icon);
+				button.setText("  ");
+				turn++;
+			}
 		} else {
-			panel.setBackground(Color.red);
-			icon = new ImageIcon(player2image);
-			turns[index] = 2;
+			if (button.getText() == " ") {
+				panel.setBackground(Color.red);
+				icon = new ImageIcon(player2image);
+				turns[index] = 2;
+				button.setIcon(icon);
+				button.setText("  ");
+				turn++;
+			}
 		}
-		button.setIcon(icon);
-		turn++;
 		whowon = TicTacToeRules.checkForWinner(turns);
-		if (whowon > 0) {
+		if (whowon == 1 || whowon == 2) {
 			if (whowon == 1) {
 				JOptionPane.showMessageDialog(null, "Congratulations! " + player1name + " won!!!");
 			} else {
@@ -90,6 +98,9 @@ public class TicTacToe implements MouseListener, Runnable {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			System.exit(0);
+		} else if (whowon == 3) {
+			JOptionPane.showMessageDialog(null, "Draw! " + player1name + " and " + player2name + " tied the game!");
 			System.exit(0);
 		}
 	}
@@ -130,6 +141,7 @@ public class TicTacToe implements MouseListener, Runnable {
 		for (int i = 0; i < 9; i++) {
 			JButton button = new JButton();
 			button.setBackground(Color.white);
+			button.setText(" ");
 			button.addMouseListener(this);
 			buttons[i] = button;
 			panel.add(button);

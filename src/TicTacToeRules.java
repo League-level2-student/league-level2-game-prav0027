@@ -26,6 +26,9 @@ public class TicTacToeRules {
 		else if(turns[2]==turns[4]&&turns[2]==turns[6]) {
 			return turns[2];
 		}
+		else if(turns[0]>0 && turns [1]>0 && turns [2]>0 && turns [3]>0 && turns [4]>0 && turns [5]>0 && turns [6]>0 && turns [7]>0 && turns [8]>0) {
+			return 3;
+		}
 		else return 0;
 	}
 	

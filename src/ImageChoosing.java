@@ -32,12 +32,17 @@ public class ImageChoosing implements ActionListener{
 	BufferedImage player1image;
 	BufferedImage player2image;
 	
-	String player1name;
-	String player2name;
+	static String player1name;
+	static String player2name;
+	
+	static boolean firstPlay = true;
 	
 	void setup() {
+		if(firstPlay==true) {
 		player1name = JOptionPane.showInputDialog("What is the first player's name? This player's color will be red.");
 		player2name = JOptionPane.showInputDialog("What is the second player's name? This player's color will be green.");
+		}
+		firstPlay = false;
 		JOptionPane.showMessageDialog(null, "The aim of the game is to get 3 in a row. When it is your turn, click on a button to put your marker there. \n When the background is red, it is "+player1name+"'s turn. When the background is green, it is "+player2name+"'s turn.");
 		frame.setSize(500, 500);
 		panel.setBackground(Color.gray);

@@ -57,6 +57,20 @@ public class TicTacToe implements MouseListener, Runnable {
 		sound = JApplet.newAudioClip(getClass().getResource(fileName));
 		sound.play();
 	}
+	
+	private void playAgain(int again) {
+		if(again==0) {
+			for(int i = 0; i<9; i++) {
+				turns[i]=0;
+			}
+			ImageChoosing imagechoosing = new ImageChoosing();
+			ImageChoosing.firstPlay = false;
+			imagechoosing.setup();
+		}
+		else {
+			System.exit(0);
+			}
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -64,7 +78,7 @@ public class TicTacToe implements MouseListener, Runnable {
 		ImageIcon icon;
 		JButton button = (JButton) e.getSource();
 		int index = getButtonIndex(button);
-
+	
 		if (turn % 2 == 0) {
 			if (button.getText() == " ") {
 				panel.setBackground(Color.green);
@@ -84,26 +98,35 @@ public class TicTacToe implements MouseListener, Runnable {
 				turn++;
 			}
 		}
+	
 		whowon = TicTacToeRules.checkForWinner(turns);
 		if (whowon == 1 || whowon == 2) {
 			if (whowon == 1) {
-				JOptionPane.showMessageDialog(null, "Congratulations! " + player1name + " won!!!");
+			JOptionPane.showMessageDialog(null, "Congratulations! " + player1name + " won!!!");
 			} else {
 				JOptionPane.showMessageDialog(null, "Congratulations! " + player2name + " won!!!");
 			}
+			
 			playSound(clapping);
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(500);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			System.exit(0);
-		} else if (whowon == 3) {
-			JOptionPane.showMessageDialog(null, "Draw! " + player1name + " and " + player2name + " tied the game!");
-			System.exit(0);
+			int again = JOptionPane.showConfirmDialog(null, "Would you like to play again? Please enter either 'yes' or 'no'.");
+			System.out.println(again);
+			playAgain(again);
 		}
+		else if (whowon == 3) {
+			JOptionPane.showMessageDialog(null, "Draw! " + player1name + " and " + player2name + " tied the game!");
+			int again = JOptionPane.showConfirmDialog(null, "Would you like to play again?");
+			System.out.println(again);
+			playAgain(again);
+		}
+		
 	}
+	
 
 	@Override
 	public void mousePressed(MouseEvent e) {
